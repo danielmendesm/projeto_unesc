@@ -26,7 +26,7 @@
         <input type="email" name="email" placeholder="E-mail">
         <input type="submit" value="Enviar">
         <input type="hidden" name="_method" value="put">
-        {{ csrf_field() }}sdasdsa
+        {{ csrf_field() }}
     </form>
 @endsection
 
