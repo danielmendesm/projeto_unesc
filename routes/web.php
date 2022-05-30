@@ -1,12 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use \App\Http\Controllers\HomeController;
-use \App\Http\Controllers\CadastroController;
-use \App\Http\Controllers\ViagemController;
+/*
+use \App\Http\Controllers\Site\HomeController;
+use \App\Http\Controllers\ContatoController;
 use \App\Http\Controllers\ProdutoController;
-
-
+*/
 
 /*
 |--------------------------------------------------------------------------
@@ -22,22 +21,33 @@ use \App\Http\Controllers\ProdutoController;
 /*Route::get('/', function () {
     return view('welcome');
 });*/
+//Route::get('/',[HomeController::class,'index']);
+/*
+ * 1 - Apresentar projeto do blog que será implementado
 
-//Route::get('/','HomeController@index');
-Route::get('/',[HomeController::class,'index']);
+2 - Muda pasta dos controladores do site
 
-Route::get('/sobre/{page?}','SobreController');
+3 - Mudar pastas das views do site
 
-Route::get('/contato','ContatoController@index');
+4 - Criar apelidos para todas as rotas
+ */
 
-Route::get('/cadastro','CadastroController@index');
+Route::get('/','Site\HomeController@index')->name('site.home');
+Route::get('/sobre/{page?}','Site\SobreController')->name('site.sobre');
+Route::get('/contato','Site\ContatoController@index')->name('site.contato');
+Route::post('/contato','Site\ContatoController@send')->name('site.contato');
+Route::put('/contato','Site\ContatoController@contact')->name('site.contato');
 
-Route::get('/viagem','ViagemController@index');
+Route::get('/painel','Painel\HomeController')->name('painel.home');
+Route::get('/painel/blog','Painel\BlogController@index')->name('painel.blog');
+Route::get('/painel/blog/novo','Painel\BlogController@novo')->name('painel.blog.novo');
+Route::post('/painel/blog/novo','Painel\BlogController@cadastrar')->name('painel.blog.novo');
+Route::get('/painel/blog/edita/{id}','Painel\BlogController@editar')->name('painel.blog.edita');
+Route::put('/painel/blog/edita/{id}','Painel\BlogController@atualizar')->name('painel.blog.edita');
+Route::get('/painel/blog/delete/{id}','Painel\BlogController@delete')->name('painel.blog.delete');
 
-Route::post('/cadastro',[CadastroController::class,'send']);
-
-Route::post('/viagem',[ViagemController::class,'send']);
-
-Route::get('/produtos',[ProdutoController::class,'index']);
+Route::get('/painel/contato','Painel\ContatoController@index')->name('painel.contato');
+Route::get('/painel/contato/exibe/{id}','Painel\ContatoController@show')->name('painel.contato.show');
+Route::get('/painel/contato/delete/{id}','Painel\ContatoController@delete')->name('painel.contato.delete');
 
 
